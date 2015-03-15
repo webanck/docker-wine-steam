@@ -9,4 +9,4 @@ winetricks d3dx9 #Needed by games.
 winetricks -q directplay #Needed by windows games multiplayer.
 winetricks --no-isolate steam
 
-echo "Vous pouvez relancer steam simplement en tapant 'steam'."
+echo "You can now launch steam just by typing 'steam'."
