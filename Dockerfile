@@ -37,13 +37,13 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 #########################END OF INSTALLATIONS##########################
 
 # Creating a wine user: replace 1001 by your user id (id -u).
-RUN useradd -u 1001 -d /home/wine -m -s /bin/bash wine && export PULSE_SERVER=unix:/run/user/1001/pulse/native
+RUN useradd -u 1001 -d /home/wine -m -s /bin/bash wine
 
 # Adding some helper scripts.
 COPY finalize_installation.sh /home/wine/.finalize_installation.sh
 RUN chown wine:wine /home/wine/.finalize_installation.sh && \
 	chmod o+x /home/wine/.finalize_installation.sh && \
-	echo 'export "PULSE_SERVER=unix:/run/user/`id -u`/pulse/native"' >> /home/wine/.bashrc && \
+	echo 'export "PULSE_SERVER=unix:/run/user/1001/pulse/native"' >> /home/wine/.bashrc && \
 	echo 'alias finalize_installation="bash /home/wine/.finalize_installation.sh"' >> /home/wine/.bashrc && \
 	echo 'alias steam="wine /home/wine/.wine/drive_c/Program\ Files/Steam/Steam.exe"' >> /home/wine/.bashrc
 
