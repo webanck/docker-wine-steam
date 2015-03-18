@@ -49,7 +49,7 @@ In the Graphics tab, I recommend to disable windows decorations and to emulate a
 ![graphics tab configuration](./winecfg-graphics.png)
 
 After the installation of Steam, you can simply use the provided alias `steam` to launch it.
-Before playing any game, be sure to turn the Steam overlay of (uncheck Steam->Settings->In-Game->Enable the Steam Overlay) because it's not supported by Wine.
+Before playing any game, be sure to turn the Steam overlay off (uncheck Steam->Settings->In-Game->Enable the Steam Overlay) because it's not supported by Wine.
 
 ##Motivation
 Have you ever tried to install Wine?
