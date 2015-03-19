@@ -11,7 +11,7 @@ Be sure to have Docker installed. Detailed explanations are given on the [Docker
 For Ubuntu 14.04 you can install the maintained packaged.
 ```
 sudo apt-get update
-sudo apt-get install docker.io
+sudo apt-get install -y docker.io
 ```
 
 ###PulseAudio
@@ -26,6 +26,15 @@ aplay /usr/share/sounds/alsa/Front_Center.wav && ps -A | grep pulseaudio
 Currently, Nvidia cards should work out of the box whereas AMD and Intel Integrated chipsets may require some additional work (tweaking in [builder.sh](./builder.sh)). Let me know about our experimentations!
 
 ##Installation
+Firstly, you need to configure pulseaudio to allow network access.
+To do so, the easiest way is to install the `paprefs` package and to enable the option in the "Network Server" tab.
+```
+sudo apt-get update
+sudo apt-get install -y paprefs
+paprefs
+```
+Then reboot for the configuration to be applied (desktop and window manager stuff).
+
 Clone this repository to get the [Dockerfile](./Dockerfile) and the helper scripts to build and launch a corresponding container.
 ```
 git clone https://github.com/webanck/docker-wine-steam.git
