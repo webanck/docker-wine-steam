@@ -23,7 +23,7 @@ aplay /usr/share/sounds/alsa/Front_Center.wav && ps -A | grep pulseaudio
 ```
 
 ###A supported GPU
-Currently, Nvidia cards should work out of the box whereas AMD and Intel Integrated chipsets may require some additional work (tweaking in [builder.sh](./builder.sh)). Let me know about our experimentations!
+Currently, Nvidia cards should work out of the box whereas AMD and Intel Integrated chipsets may require some additional work (tweaking in [builder.sh](./builder.sh)). Let me know about your experimentations!
 
 ##Installation
 Firstly, you need to configure pulseaudio to allow network access.
