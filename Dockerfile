@@ -53,8 +53,6 @@ RUN	dpkg --add-architecture i386 && \
 	apt-get install -y --no-install-recommends winbind && \
 # Installation of pulseaudio support for wine sound.
 	apt-get install -y --no-install-recommends pulseaudio:i386 libasound2-plugins:i386 && \
-# Installation of libexttextcat to avoid crash at the steam installation.
-	apt-get install -y --no-install-recommends ibexttextcat-2.0-0 && \
 
 # Installation of winetricks tricks as wine user.
 	su -p -l wine -c winecfg && \
