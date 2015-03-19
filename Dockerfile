@@ -45,14 +45,16 @@ RUN	dpkg --add-architecture i386 && \
 	apt-get update && \
 
 # Installation of graphics driver.
-	apt-get install -y --no-install-recommends libgl1-mesa-dri:i386 && \
+	apt-get install -y --no-install-recommends nvidia-current && \
 
 # Installation of win, winetricks and temporary xvfb to install winetricks tricks during docker build.
-	apt-get install -y --no-install-recommends wine1.7  winetricks xvfb && \
+	apt-get install -y --no-install-recommends wine1.7 winetricks xvfb && \
 # Installation of winbind to stop ntlm error messages.
 	apt-get install -y --no-install-recommends winbind && \
 # Installation of pulseaudio support for wine sound.
 	apt-get install -y --no-install-recommends pulseaudio:i386 libasound2-plugins:i386 && \
+# Installation of libexttextcat to avoid crash at the steam installation.
+	apt-get install -y --no-install-recommends ibexttextcat-2.0-0 && \
 
 # Installation of winetricks tricks as wine user.
 	su -p -l wine -c winecfg && \
