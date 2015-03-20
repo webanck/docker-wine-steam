@@ -33,6 +33,8 @@ sudo apt-get update
 sudo apt-get install -y paprefs
 paprefs
 ```
+![paprefs configuration](./paprefs.png)
+
 Then reboot for the configuration to be applied (desktop and window manager stuff).
 
 Clone this repository to get the [Dockerfile](./Dockerfile) and the helper scripts to build and launch a corresponding container.
