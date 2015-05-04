@@ -8,7 +8,7 @@ Bind X11's socket for the windows to appear and use ear the sound from PulseAudi
 ###Docker
 
 Be sure to have Docker installed. Detailed explanations are given on the [Docker official site](https://docs.docker.com/installation/).
-For Ubuntu 14.04 you can install the maintained packaged.
+For Ubuntu 14.04 you can install the maintained package.
 ```
 sudo apt-get update
 sudo apt-get install -y docker.io
