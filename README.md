@@ -34,6 +34,7 @@ cd docker-wine-steam
 ./launcher.sh
 ```
 Then you should be inside the container as the wine user. The last steps are an ultimate Wine configuration and the installation of Steam (which you can skip if you just want to use Wine for Windows games/applications).
+
 *Warning*: leaving the container typing `exit` or using the keys `Ctrl+C` will destroy all it's data including your installed games and saves. 
 You might want to copy some files into the [shared_directory](shared_directory) which is mounted in the home of the wine user. Some scripts are provided to help you [import](shared_directory/importSteam.sh) or [export](shared_directory/exportSteam.sh) quickly your steam installation.
 ```
