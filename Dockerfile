@@ -40,21 +40,24 @@ RUN	dpkg --add-architecture i386 && \
 	apt-get install -y --no-install-recommends software-properties-common && \
 
 # Adding required ppas: graphics drivers and wine.
-	add-apt-repository ppa:ubuntu-x-swat/x-updates && \
+	add-apt-repository ppa:graphics-drivers/ppa && \
 	add-apt-repository ppa:ubuntu-wine/ppa && \
 	apt-get update && \
 
 # Installation of graphics driver.
-	apt-get install -y --no-install-recommends nvidia-current && \
+	apt-get install -y --no-install-recommends nvidia-361 && \
 
-# Installation of win, winetricks and temporary xvfb to install winetricks tricks during docker build.
-	apt-get install -y --no-install-recommends wine1.7 winetricks xvfb && \
+# Installation of wine, winetricks and its utilities and temporary xvfb to install latest winetricks and its tricks during docker build.
+	apt-get install -y --no-install-recommends wine1.8 cabextract unzip p7zip wget zenity xvfb && \
+	wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && chmod +x winetricks && mv winetricks /usr/local/bin && \
 # Installation of winbind to stop ntlm error messages.
 	apt-get install -y --no-install-recommends winbind && \
+# Installation of p11 to stop p11 kit error messages.
+	apt-get install -y --no-install-recommends p11-kit-modules:i386 libp11-kit-gnome-keyring:i386 && \
 # Installation of pulseaudio support for wine sound.
 	apt-get install -y --no-install-recommends pulseaudio:i386 libasound2-plugins:i386 && \
 
-# Installation of winetricks tricks as wine user.
+# Installation of winetricks' tricks as wine user, comment if not needed.
 	su -p -l wine -c winecfg && \
 	su -p -l wine -c 'xvfb-run -a winetricks -q corefonts' && \
 	su -p -l wine -c 'xvfb-run -a winetricks -q dotnet20' && \
