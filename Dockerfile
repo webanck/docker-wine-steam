@@ -45,7 +45,7 @@ RUN	dpkg --add-architecture i386 && \
 	apt-get update && \
 
 # Installation of graphics driver.
-	apt-get install -y --no-install-recommends nvidia-361 && \
+	apt-get install -y --no-install-recommends initramfs-tools nvidia-361 && \
 
 # Installation of wine, winetricks and its utilities and temporary xvfb to install latest winetricks and its tricks during docker build.
 	apt-get install -y --no-install-recommends wine1.8 cabextract unzip p7zip wget zenity xvfb && \
