@@ -7,10 +7,21 @@ Bind X11's socket for the windows to appear and use ear the sound from PulseAudi
 
 ### Docker
 
-Be sure to have Docker installed. Detailed explanations are given on the [Docker official site](https://docs.docker.com/installation/).
-For Ubuntu 14.04 you can install the latest version of Docker with the following command.
+Be sure to have Docker installed. Detailed explanations are given on the [Docker official site](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/).
+For Ubuntu 16.04 (amd64) you can install the latest version of Docker Community Edition with the following command.
 ```
-wget -qO- https://get.docker.com/ | sh
+sudo apt-get install \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) \
+  stable"
+sudo apt-get update
+sudo apt-get install docker-ce
 ```
 
 ### PulseAudio
