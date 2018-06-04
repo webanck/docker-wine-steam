@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM library/ubuntu:xenial
 MAINTAINER Antoine Webanck <antoine.webanck@gmail.com>
 
 # Creating the wine user and setting up dedicated non-root environment: replace 1001 by your user id (id -u) for X sharing.
