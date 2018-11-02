@@ -37,7 +37,7 @@ RUN	dpkg --add-architecture i386 && \
 	apt-get upgrade -y && \
 
 # We need software-properties-common to add ppas and wget and apt-transport-https to add repositories and their keys.
-	apt-get install -y --no-install-recommends software-properties-common apt-transport-https wget && \
+	apt-get install -y --no-install-recommends gpg-agent software-properties-common apt-transport-https wget && \
 
 # Adding required ppas: graphics drivers and wine.
 	add-apt-repository ppa:graphics-drivers/ppa && \
