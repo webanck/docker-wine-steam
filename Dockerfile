@@ -31,34 +31,28 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # We want the 32 bits version of wine allowing winetricks.
 RUN	dpkg --add-architecture i386 && \
-
 # Updating and upgrading a bit.
 	apt-get update && \
 	apt-get upgrade -y && \
-
 # We need software-properties-common to add ppas and wget and apt-transport-https to add repositories and their keys.
 	apt-get install -y --no-install-recommends gpg-agent software-properties-common apt-transport-https wget && \
-
 # Adding required ppas: graphics drivers and wine.
 	add-apt-repository ppa:graphics-drivers/ppa && \
-	wget -nc https://dl.winehq.org/wine-builds/Release.key && apt-key add Release.key && add-apt-repository https://dl.winehq.org/wine-builds/ubuntu/ && \
+	wget -nc https://dl.winehq.org/wine-builds/winehq.key && apt-key add winehq.key && add-apt-repository https://dl.winehq.org/wine-builds/ubuntu/ && \
 	apt-get update && \
-
 # Installation of graphics driver.
 	apt-get install -y --no-install-recommends initramfs-tools nvidia-384 && \
-
 # Installation of wine, winetricks and its utilities and temporary xvfb to install latest winetricks and its tricks during docker build.
 	apt-get install -y --no-install-recommends winehq-stable cabextract unzip p7zip zenity && \
 	wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && chmod +x winetricks && mv winetricks /usr/local/bin && \
 # Installation of winbind to stop ntlm error messages.
 	apt-get install -y --no-install-recommends winbind && \
 # Installation of p11 to stop p11 kit error messages.
-	apt-get install -y --no-install-recommends p11-kit-modules:i386 libp11-kit-gnome-keyring:i386 && \
+	apt-get install -y --no-install-recommends p11-kit-modules:i386 gnome-keyring:i386 && \
 # Installation of pulseaudio support for wine sound.
 	apt-get install -y --no-install-recommends pulseaudio:i386 && \
 	sed -i "s/; enable-shm = yes/enable-shm = no/g" /etc/pulse/daemon.conf && \
 	sed -i "s/; enable-shm = yes/enable-shm = no/g" /etc/pulse/client.conf && \
-
 # Installation of winetricks' tricks as wine user, comment if not needed.
 	su -p -l wine -c 'winecfg && wineserver --wait' && \
 	su -p -l wine -c 'winetricks -q winxp && wineserver --wait' && \
@@ -68,7 +62,6 @@ RUN	dpkg --add-architecture i386 && \
 	su -p -l wine -c 'winetricks -q xna40 && wineserver --wait' && \
 	su -p -l wine -c 'winetricks -q d3dx9 && wineserver --wait' && \
 	su -p -l wine -c 'winetricks -q directplay && wineserver --wait' && \
-
 # Cleaning up.
 	apt-get autoremove -y --purge software-properties-common && \
 	apt-get autoremove -y --purge && \
