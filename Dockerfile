@@ -48,7 +48,7 @@ RUN	dpkg --add-architecture i386 && \
 	( \
 		#[ "$GPU_TYPE" = NVIDIA ] && apt-get install -y --no-install-recommends initramfs-tools nvidia-384 || \
 		[ "$GPU_TYPE" = NVIDIA ] && apt-get install -y --no-install-recommends initramfs-tools nvidia-driver-460 || \
-		[ "$GPU_TYPE" = INTEL_HD_GRAPHICS ] && apt-get install -y --no-install-recommends libgl1-mesa-glx:i386 libgl1-mesa-dri:i386 \
+		[ "$GPU_TYPE" = INTEL ] && apt-get install -y --no-install-recommends libgl1-mesa-glx:i386 libgl1-mesa-dri:i386 \
 	) && \
 # Installation of wine, winetricks and its utilities and temporary xvfb to install latest winetricks and its tricks during docker build.
 	apt-get install -y --no-install-recommends winehq-stable cabextract unzip p7zip zenity && \
