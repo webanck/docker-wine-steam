@@ -10,7 +10,7 @@ CONTAINER_NAME=vaporized_wine
 			-v ~/.Xauthority:/home/wine/.Xauthority \
 			--ipc="host" \
 			--device=/dev/snd:/dev/snd \
-			--device=/dev/nvidiactl --device=/dev/nvidia-uvm --device=/dev/nvidia0 \
+			--device=/dev/dri:/dev/dri \
 			-v /run/user/`id -u`/pulse/native:/run/user/`id -u`/pulse/native \
 			-v `pwd`/shared_directory:/home/wine/shared_directory \
 			--net=host \
@@ -22,3 +22,4 @@ CONTAINER_NAME=vaporized_wine
 	echo 'The container already exists, relaunching the old one.' && \
 	sudo docker start -ai "$CONTAINER_NAME" \
 )
+#			--device=/dev/nvidiactl --device=/dev/nvidia-uvm --device=/dev/nvidia0 \
