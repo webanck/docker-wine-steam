@@ -2,6 +2,12 @@
 
 CONTAINER_NAME=vaporized_wine
 
+# Choosing the right GPU type to share the right device.
+GPU_DEVICE_PARAMETERS=""
+source $(dirname "$0")/gpu.sh
+[ "$GPU_TYPE" = NVIDIA ] && GPU_DEVICE_PARAMETERS="--device=/dev/nvidiactl --device=/dev/nvidia-uvm --device=/dev/nvidia0"
+[ "$GPU_TYPE" = INTEL ] && GPU_DEVICE_PARAMETERS="--device=/dev/dri:/dev/dri"
+
 ( \
 	echo 'Trying to run a new data container.' && \
 	sudo docker run -it \
@@ -10,7 +16,7 @@ CONTAINER_NAME=vaporized_wine
 			-v ~/.Xauthority:/home/wine/.Xauthority \
 			--ipc="host" \
 			--device=/dev/snd:/dev/snd \
-			--device=/dev/dri:/dev/dri \
+			$GPU_DEVICE_PARAMETERS \
 			-v /run/user/`id -u`/pulse/native:/run/user/`id -u`/pulse/native \
 			-v `pwd`/shared_directory:/home/wine/shared_directory \
 			--net=host \
@@ -22,4 +28,3 @@ CONTAINER_NAME=vaporized_wine
 	echo 'The container already exists, relaunching the old one.' && \
 	sudo docker start -ai "$CONTAINER_NAME" \
 )
-#			--device=/dev/nvidiactl --device=/dev/nvidia-uvm --device=/dev/nvidia0 \
