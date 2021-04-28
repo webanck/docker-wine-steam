@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM library/ubuntu:xenial
 MAINTAINER Antoine Webanck <antoine.webanck@gmail.com>
 
 # Parameterizing docker build.
