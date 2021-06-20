@@ -30,7 +30,7 @@ ENV PULSE_SERVER unix:/run/user/1001/pulse/native
 #########################START  INSTALLATIONS##########################
 
 # We don't want any interaction from package installation during the docker image building.
-ARG DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 
 
 # We want the 32 bits version of wine allowing winetricks.
