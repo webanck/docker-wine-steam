@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CONTAINER_NAME=vaporized_wine
 

@@ -2,12 +2,12 @@ FROM ubuntu
 MAINTAINER Antoine Webanck <antoine.webanck@gmail.com>
 
 # Parameterizing docker build.
-ARG WINE_USER_UID 1001
-ARG GPU_TYPE NVIDIA
+ARG WINE_USER_UID=1001
+ARG GPU_TYPE=NVIDIA
 
 # Creating the wine user and setting up dedicated non-root environment: replace 1001 by your user id (id -u) for X sharing.
 RUN useradd -u "$WINE_USER_UID" -d /home/wine -m -s /bin/bash wine
-ENV HOME /home/wine
+ENV HOME=/home/wine
 WORKDIR /home/wine
 
 # Adding the helper script and an alias to launch the steam to be installed.
@@ -18,19 +18,19 @@ RUN chown wine:wine /home/wine/.finalize_installation.sh && \
 	su wine -c "echo 'alias steam=\"wine /home/wine/.wine/drive_c/Program\ Files/Steam/Steam.exe -no-cef-sandbox > /dev/null \"' >> /home/wine/.bashrc"
 
 # Setting up the wineprefix to force 32 bit architecture.
-ENV WINEPREFIX /home/wine/.wine
-ENV WINEARCH win32
+ENV WINEPREFIX=/home/wine/.wine
+ENV WINEARCH=win32
 
 # Disabling warning messages from wine, comment for debug purpose.
-ENV WINEDEBUG -all
+ENV WINEDEBUG=-all
 
 # Adding the link to the pulseaudio server for the client to find it.
-ENV PULSE_SERVER unix:/run/user/1001/pulse/native
+ENV PULSE_SERVER=unix:/run/user/"$PROTON_USER_UID"/pulse/native
 
 #########################START  INSTALLATIONS##########################
 
 # We don't want any interaction from package installation during the docker image building.
-ARG DEBIAN_FRONTEND noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 
 
 # We want the 32 bits version of wine allowing winetricks.
